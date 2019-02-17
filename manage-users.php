@@ -12,8 +12,8 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 if(isset($_GET['del']))
 		  {
-		          mysqli_query($con,"delete from products where id = '".$_GET['id']."'");
-                  $_SESSION['delmsg']="Product deleted !!";
+		          mysqli_query($con,"delete from customers where id = '".$_GET['id']."'");
+                  $_SESSION['delmsg']="Customer deleted !!";
 		  }
 
 ?>
@@ -59,32 +59,40 @@ if(isset($_GET['del']))
 									<thead>
 										<tr>
 											<th>#</th>
-											<th> Name</th>
+											<th>Name</th>
 											<th>Email </th>
 											<th>Contact no</th>
-											<th>Shippping Address/City/State/Pincode </th>
-											<th>Billing Address/City/State/Pincode </th>
+											<th>City</th>
+											<th>Country </th>
 											<th>Reg. Date </th>
 										
 										</tr>
 									</thead>
 									<tbody>
 
-<?php $query=mysqli_query($con,"select * from users");
+<?php $query=mysqli_query($con,"select * from customers");
 $cnt=1;
-while($row=mysqli_fetch_array($query))
+
+
+// if(empty($row))
+// {
+	
+
+while($row = mysqli_fetch_array($query))
 {
 ?>									
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($row['name']);?></td>
+											<td><?php echo htmlentities($row['first_name']. $row['last_name']);?></td>
 											<td><?php echo htmlentities($row['email']);?></td>
-											<td> <?php echo htmlentities($row['contactno']);?></td>
-											<td><?php echo htmlentities($row['shippingAddress'].",".$row['shippingCity'].",".$row['shippingState']."-".$row['shippingPincode']);?></td>
-											<td><?php echo htmlentities($row['billingAddress'].",".$row['billingCity'].",".$row['billingState']."-".$row['billingPincode']);?></td>
-											<td><?php echo htmlentities($row['regDate']);?></td>
+											<td> <?php echo htmlentities($row['phone']);?></td>
+											<td><?php echo htmlentities($row['city']);?></td>
+											<td><?php echo htmlentities($row['country']);?></td>
+											<td><?php echo htmlentities($row['create_date']);?></td>
 											
-										<?php $cnt=$cnt+1; } ?>
+										<?php $cnt=$cnt+1; } 
+										// }
+										?>
 										
 								</table>
 							</div>

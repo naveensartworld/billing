@@ -6,9 +6,10 @@ if(isset($_POST['submit']))
 {
 	$username=$_POST['username'];
 	$password=md5($_POST['password']);
-<<<<<<< HEAD
-$ret=mysqli_query($con,"SELECT * FROM admin WHERE admin_user='$username' and admin_pass='$password'");
+	
+$ret=mysqli_query($con,"SELECT * FROM admin_users WHERE admin_user='$username' and admin_pass='$password'");
 $num=mysqli_fetch_array($ret);
+// echo "<pre>";print_r($num);exit;
 if($num>0)
 {
 $extra="change-password.php";//
@@ -28,29 +29,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 header("location:http://$host$uri/$extra");
 exit();
 }
-=======
-	$ret=mysqli_query($con,"SELECT * FROM admin WHERE username='$username' and password='$password'");
-	$num=mysqli_fetch_array($ret);
-	if($num>0)
-	{
-		$extra="change-password.php";//
-		$_SESSION['alogin']=$_POST['username'];
-		$_SESSION['id']=$num['id'];
-		$host=$_SERVER['HTTP_HOST'];
-		$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-		header("location:http://$host$uri/$extra");
-		exit();
-	}
-	else
-	{
-		$_SESSION['errmsg']="Invalid username or password";
-		$extra="index.php";
-		$host  = $_SERVER['HTTP_HOST'];
-		$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-		header("location:http://$host$uri/$extra");
-		exit();
-	}
->>>>>>> 41502da8566d1ae96d8fbb2ead0fd4b20ba4ea12
+
 }
 ?>
 <!doctype html>

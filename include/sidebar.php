@@ -4,16 +4,16 @@
                                 <a href="javascript:void(0)" ><span>Change Password</span></a>
                               
                             </li>
-                           <!-- <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Sidebar
-                                        Types
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Custumer
+                                        
                                     </span></a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">Left Sidebar</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                                    <li><a href="add-customer.php">Add Customer</a></li>
+                                    <li><a href="manage-users.php">Manage Customer</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>
                                 <ul class="collapse">
                                     <li><a href="barchart.html">bar chart</a></li>
