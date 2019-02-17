@@ -1,102 +1,106 @@
-<div class="span3">
-					<div class="sidebar">
-
-
-<ul class="widget widget-menu unstyled">
-	<?php /*						<li>
-								<a class="collapsed" data-toggle="collapse" href="#togglePages">
-									<i class="menu-icon icon-cog"></i>
-									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
-									Order Management
-								</a>
-								<ul id="togglePages" class="collapse unstyled">
-									<li>
-										<a href="todays-orders.php">
-											<i class="icon-tasks"></i>
-											Today's Orders
-  <?php
-  $f1="00:00:00";
-$from=date('Y-m-d')." ".$f1;
-$t1="23:59:59";
-$to=date('Y-m-d')." ".$t1;
- $result = mysqli_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
-$num_rows1 = mysqli_num_rows($result);
-{
-?>
-											<b class="label orange pull-right"><?php echo htmlentities($num_rows1); ?></b>
-											<?php } ?>
-										</a>
-									</li>
-									<li>
-										<a href="pending-orders.php">
-											<i class="icon-tasks"></i>
-											Pending Orders
-										<?php	
-	$status='Delivered';									 
-$ret = mysqli_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
-$num = mysqli_num_rows($ret);
-{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
-<?php } ?>
-										</a>
-									</li>
-									<li>
-										<a href="delivered-orders.php">
-											<i class="icon-inbox"></i>
-											Delivered Orders
-								<?php	
-	$status='Delivered';									 
-$rt = mysqli_query($con,"SELECT * FROM Orders where orderStatus='$status'");
-$num1 = mysqli_num_rows($rt);
-{?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
-<?php } ?>
-
-										</a>
-									</li>
-								</ul>
-							</li>
-							<?php */?>
-							<li>
-								<a class="collapsed" data-toggle="collapse" href="#togglePages">
-									<i class="menu-icon icon-group"></i>
-									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
-									 users
-								</a>
-							<ul id="togglePages" class="collapse unstyled">
-								<li>
-									<a href="manage-users.php">
-										<i class="menu-icon icon-group"></i>
-										Add users
-									</a>
-								</li>
-								<li>
-									<a href="manage-users.php">
-										<i class="menu-icon icon-group"></i>
-										Manage users
-									</a>
-								</li>
-							</ul>
-							</li>
-						</ul>
-
-
-						<!--<ul class="widget widget-menu unstyled">
-                                <li><a href="category.php"><i class="menu-icon icon-tasks"></i> Create Category </a></li>
-                                <li><a href="subcategory.php"><i class="menu-icon icon-tasks"></i>Sub Category </a></li>
-                                <li><a href="insert-product.php"><i class="menu-icon icon-paste"></i>Insert Product </a></li>
-                                <li><a href="manage-products.php"><i class="menu-icon icon-table"></i>Manage Products </a></li>
-                        
-                            </ul><!--/.widget-nav-->
-
-						<ul class="widget widget-menu unstyled">
-							<!--<li><a href="user-logs.php"><i class="menu-icon icon-tasks"></i>User Login Log </a></li>-->
-							
-							<li>
-								<a href="logout.php">
-									<i class="menu-icon icon-signout"></i>
-									Logout
-								</a>
-							</li>
-						</ul>
-
-					</div><!--/.sidebar-->
-				</div><!--/.span3-->
+<nav>
+                        <ul class="metismenu" id="menu">
+                            <li>
+                                <a href="javascript:void(0)" ><span>Change Password</span></a>
+                              
+                            </li>
+                           <!-- <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Sidebar
+                                        Types
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="index.html">Left Sidebar</a></li>
+                                    <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>
+                                <ul class="collapse">
+                                    <li><a href="barchart.html">bar chart</a></li>
+                                    <li><a href="linechart.html">line Chart</a></li>
+                                    <li><a href="piechart.html">pie chart</a></li>
+                                </ul>
+                            </li>
+                            <li class="active">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>UI Features</span></a>
+                                <ul class="collapse">
+                                    <li><a href="accordion.html">Accordion</a></li>
+                                    <li><a href="alert.html">Alert</a></li>
+                                    <li><a href="badge.html">Badge</a></li>
+                                    <li><a href="button.html">Button</a></li>
+                                    <li><a href="button-group.html">Button Group</a></li>
+                                    <li><a href="cards.html">Cards</a></li>
+                                    <li><a href="dropdown.html">Dropdown</a></li>
+                                    <li><a href="list-group.html">List Group</a></li>
+                                    <li><a href="media-object.html">Media Object</a></li>
+                                    <li><a href="modal.html">Modal</a></li>
+                                    <li><a href="pagination.html">Pagination</a></li>
+                                    <li><a href="popovers.html">Popover</a></li>
+                                    <li><a href="progressbar.html">Progressbar</a></li>
+                                    <li><a href="tab.html">Tab</a></li>
+                                    <li><a href="typography.html">Typography</a></li>
+                                    <li class="active"><a href="form.html">Form</a></li>
+                                    <li><a href="grid.html">grid system</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-slice"></i><span>icons</span></a>
+                                <ul class="collapse">
+                                    <li><a href="fontawesome.html">fontawesome icons</a></li>
+                                    <li><a href="themify.html">themify icons</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                    <span>Tables</span></a>
+                                <ul class="collapse">
+                                    <li><a href="table-basic.html">basic table</a></li>
+                                    <li><a href="table-layout.html">table layout</a></li>
+                                    <li><a href="datatable.html">datatable</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="maps.html"><i class="ti-map-alt"></i> <span>maps</span></a></li>
+                            <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Invoice Summary</span></a></li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i> <span>Pages</span></a>
+                                <ul class="collapse">
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="login2.html">Login 2</a></li>
+                                    <li><a href="login3.html">Login 3</a></li>
+                                    <li><a href="register.html">Register</a></li>
+                                    <li><a href="register2.html">Register 2</a></li>
+                                    <li><a href="register3.html">Register 3</a></li>
+                                    <li><a href="register4.html">Register 4</a></li>
+                                    <li><a href="screenlock.html">Lock Screen</a></li>
+                                    <li><a href="screenlock2.html">Lock Screen 2</a></li>
+                                    <li><a href="reset-pass.html">reset password</a></li>
+                                    <li><a href="pricing.html">Pricing</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-exclamation-triangle"></i>
+                                    <span>Error</span></a>
+                                <ul class="collapse">
+                                    <li><a href="404.html">Error 404</a></li>
+                                    <li><a href="403.html">Error 403</a></li>
+                                    <li><a href="500.html">Error 500</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>Multi
+                                        level menu</span></a>
+                                <ul class="collapse">
+                                    <li><a href="#">Item level (1)</a></li>
+                                    <li><a href="#">Item level (1)</a></li>
+                                    <li><a href="#" aria-expanded="true">Item level (1)</a>
+                                        <ul class="collapse">
+                                            <li><a href="#">Item level (2)</a></li>
+                                            <li><a href="#">Item level (2)</a></li>
+                                            <li><a href="#">Item level (2)</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Item level (1)</a></li>
+                                </ul>
+                            </li>-->
+                        </ul>
+                    </nav>
