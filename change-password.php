@@ -14,11 +14,11 @@ else{
 		if($num>0)
 		{
 			 $con=mysqli_query($con,"update admin set password='".md5($_POST['newpassword'])."', updationDate='$currentTime' where username='".$_SESSION['alogin']."'");
-			$_SESSION['msg']="Password Changed Successfully !!";
+			$_SESSION['smsg']="Password Changed Successfully !!";
 		}
 		else
 		{
-			$_SESSION['msg']="Old Password not match !!";
+			$_SESSION['emsg']="Please enter correct Current Password !!";
 		}
 	}
 }
@@ -31,36 +31,7 @@ else{
     <title>Change Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include_once("include/header.php"); ?>
-    <script type="text/javascript">
-	function valid()
-	{
-		if(document.chngpwd.password.value=="")
-		{
-			alert("Current Password Filed is Empty !!");
-			document.chngpwd.password.focus();
-			return false;
-		}
-		else if(document.chngpwd.newpassword.value=="")
-		{
-			alert("New Password Filed is Empty !!");
-			document.chngpwd.newpassword.focus();
-			return false;
-		}
-		else if(document.chngpwd.confirmpassword.value=="")
-		{
-			alert("Confirm Password Filed is Empty !!");
-			document.chngpwd.confirmpassword.focus();
-			return false;
-		}
-		else if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
-		{
-			alert("Password and Confirm Password Field do not match  !!");
-			document.chngpwd.confirmpassword.focus();
-			return false;
-		}
-		return true;
-	}
-</script>
+  
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -109,7 +80,17 @@ else{
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="header-title">Change Password</h4>
-										<form class="form-horizontal row-fluid" name="chngpwd" method="post" onSubmit="return valid();">
+                                        <?php if(isset($_SESSION['emsg']) and $_SESSION['emsg']!='') { ?>
+                                        <div class="alert alert-danger" role="alert" style="margin::0 0 10px 0;">
+                                               <?php echo htmlentities($_SESSION['emsg']); ?><?php echo htmlentities($_SESSION['emsg']="");?>
+                                         </div>
+                                        <?php } ?>
+                                        <?php if(isset($_SESSION['smsg']) and $_SESSION['smsg']!='') { ?>
+                                     	 <div class="alert alert-success" role="alert"  style="margin::0 0 10px 0;">
+                                               <?php echo htmlentities($_SESSION['smsg']); ?><?php echo htmlentities($_SESSION['smsg']="");?>
+                                         </div>
+                                        <?php } ?>
+										<form class="needs-validation" novalidate="" name="chngpwd" method="post" onSubmit="return valid();">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Current Password</label>
                                                 <input type="password" id="exampleInputEmail1" placeholder="Enter your current Password"  name="password" class="form-control" required>
@@ -120,7 +101,7 @@ else{
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword2">Confirm New Password</label>
-                                                <input type="password" placeholder="Enter your new Password again"  id="exampleInputPassword2"  name="confirmpassword" class="form-control" required>													
+                                                <input type="password" placeholder="Enter your new Password again" onBlur="javascript:valid();"  id="exampleInputPassword2"  name="confirmpassword" class="form-control" required>	<div class="invalid-feedback" id="invalid_feedback" style="display:none;">Password and Confirm Password Field do not match  !!	</div>												
                                             </div>
                                             <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                            
@@ -141,4 +122,19 @@ else{
     </div>
 </body>
 <?php include_once("include/footer.php"); ?>
+  <script type="text/javascript">
+	function valid()
+	{
+		
+		if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
+		{
+			$("#invalid_feedback").html("Password and Confirm Password Field do not match  !!");
+			$("#invalid_feedback").show();
+			$("#exampleInputPassword2").attr("style","border-color: #dc3545");
+			document.chngpwd.confirmpassword.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
 </html>
