@@ -1,32 +1,16 @@
-<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-					<i class="icon-reorder shaded"></i>
-				</a>
-
-			  	<a class="brand" href="index.html">
-			  		Shopping Portal | Admin
-			  	</a>
-
-				<div class="nav-collapse collapse navbar-inverse-collapse">
-					<ul class="nav pull-right">
-						<li><a href="#">
-							Admin
-						</a></li>
-						<li class="nav-user dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="images/user.png" class="nav-avatar" />
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="change-password.php">Change Password</a></li>
-								<li class="divider"></li>
-								<li><a href="logout.php">Logout</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div><!-- /.nav-collapse -->
-			</div>
-		</div><!-- /navbar-inner -->
-	</div><!-- /navbar -->
+<link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/themify-icons.css">
+<link rel="stylesheet" href="assets/css/metisMenu.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/slicknav.min.css">
+<!-- amchart css -->
+<link rel="stylesheet" href="assets/css/export.css" type="text/css" media="all" />
+<!-- others css -->
+<link rel="stylesheet" href="assets/css/typography.css">
+<link rel="stylesheet" href="assets/css/default-css.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<!-- modernizr css -->
+<script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
