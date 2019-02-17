@@ -63,7 +63,7 @@ if(isset($_POST['submit']))
                         <?php } ?>
                         <div class="form-gp">
                             <label for="exampleInputEmail1">Username</label>
-                            <input class="form-control" required="true" type="text" id="inputEmail" autocomplete="off" name="username" placeholder="Username">
+                            <input class="form-control" required="true" type="text" id="inputEmail" autocomplete="off" name="username" placeholder="">
                             <i class="ti-email"></i>
                         </div>
                         <div class="form-gp">
@@ -71,7 +71,7 @@ if(isset($_POST['submit']))
                             <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
 							<input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
 
-                            <input class="form-control" required="true" type="password" id="inputPassword" autocomplete="new-password" name="password" placeholder="Password">
+                            <input class="form-control" required="true" type="password" id="inputPassword" autocomplete="new-password" name="password" placeholder="">
                             <i class="ti-lock"></i>
                         </div>
                         <div class="row mb-4 rmber-area">
