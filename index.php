@@ -6,7 +6,7 @@ if(isset($_POST['submit']))
 {
 	$username=$_POST['username'];
 	$password=md5($_POST['password']);
-	
+
 $ret=mysqli_query($con,"SELECT * FROM admin_users WHERE admin_user='$username' and admin_pass='$password'");
 $num=mysqli_fetch_array($ret);
 // echo "<pre>";print_r($num);exit;
