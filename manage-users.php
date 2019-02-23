@@ -65,7 +65,7 @@ if(isset($_GET['del']))
 											<th>City</th>
 											<th>Country </th>
 											<th>Reg. Date </th>
-										
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -83,13 +83,15 @@ while($row = mysqli_fetch_array($query))
 ?>									
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($row['first_name']. $row['last_name']);?></td>
+											<td><?php echo htmlentities($row['first_name']. ' ' . $row['last_name']);?></td>
 											<td><?php echo htmlentities($row['email']);?></td>
 											<td> <?php echo htmlentities($row['phone']);?></td>
 											<td><?php echo htmlentities($row['city']);?></td>
 											<td><?php echo htmlentities($row['country']);?></td>
 											<td><?php echo htmlentities($row['create_date']);?></td>
-											
+											<td>
+											<a href="edit-customer.php?id=<?php echo $row['id']?>" ><i class="icon-edit">edit</i></a>
+											<a href="manage-custom.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">del<i class="icon-remove-sign"></i></a></td>
 										<?php $cnt=$cnt+1; } 
 										// }
 										?>
