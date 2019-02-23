@@ -14,7 +14,7 @@ if($num>0)
 {
 $extra="change-password.php";//
 $_SESSION['alogin']=$_POST['username'];
-$_SESSION['id']=$num['id'];
+$_SESSION['id']=$num['row_id'];
 $host=$_SERVER['HTTP_HOST'];
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 header("location:http://$host$uri/$extra");
@@ -61,7 +61,7 @@ exit();
                     <div class="login-form-body">
                     	<?php if(isset($_SESSION['errmsg']) and $_SESSION['errmsg']!='') { ?>
                     	<div class="alert alert-danger" role="alert" style="margin::0 0 10px 0;">
-                                            <strong>Oh snap!</strong> <?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?>
+                                <?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?>
                          </div>
                         <?php } ?>
                         <div class="form-gp">
