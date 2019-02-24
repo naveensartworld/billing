@@ -1,30 +1,33 @@
-
+	
 <?php
 session_start();
 include('include/config.php');
 if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
+{	
+	header('location:index.php');
 }
-else{
-	$pid=intval($_GET['id']);// product id
-if(isset($_POST['submit']))
+else
 {
+	$pid=intval($_GET['id']);// product id
+	if(isset($_POST['submit']))
+	{
 
-	$first_name = !empty($_POST['first_name'])?$_POST['first_name']:NULL; 
-	$last_name = !empty($_POST['last_name'])?$_POST['last_name']:NULL;
-	$email = !empty($_POST['email'])?$_POST['email']:NULL;
-	$password = !empty($_POST['password'])?$_POST['password']:NULL;
-	$phone = !empty($_POST['phone'])?$_POST['phone']:NULL;
-	$city = !empty($_POST['city'])?$_POST['city']:NULL;
-	$country = !empty($_POST['country'])?$_POST['country']:NULL;
-	$active=!empty($_POST['active'])?$_POST['active']:NULL;
-	$date = date("Y-m-d H:i:s");
-		
-$sql=mysqli_query($con,"update  customers set  first_name = '$first_name',last_name='$last_name',email='$email',password='$password', phone = '$phone',city = '$city',country ='$country',active = '$active',  last_modify_date = '$date'  where id='$pid' ");
-$_SESSION['msg']="Customer Updated Successfully !!";
+		$first_name = !empty($_POST['first_name'])?$_POST['first_name']:NULL; 
+		$last_name = !empty($_POST['last_name'])?$_POST['last_name']:NULL;
+		$email = !empty($_POST['email'])?$_POST['email']:NULL;
+		$password = !empty($_POST['password'])?$_POST['password']:NULL;
+		$phone = !empty($_POST['phone'])?$_POST['phone']:NULL;
+		$city = !empty($_POST['city'])?$_POST['city']:NULL;
+		$country = !empty($_POST['country'])?$_POST['country']:NULL;
+		$active=!empty($_POST['active'])?$_POST['active']:NULL;
+		$date = date("Y-m-d H:i:s");
+		$sql=mysqli_query($con,"update  customers set  first_name = '$first_name',last_name='$last_name',email='$email',password='$password', phone = '$phone',city = '$city',country ='$country',active = '$active',  last_modify_date = '$date'  where id='$pid' ");
+		if($sql)
+			$_SESSION['msg']="Customer Updated Successfully !!";
+		else
+			$_SESSION['msg']="Some problem to update, Please try again!!";
 
-}
+	}
 
 
 ?>
@@ -39,25 +42,25 @@ $_SESSION['msg']="Customer Updated Successfully !!";
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
-<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+	<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+	<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
    <script>
-function getSubcat(val) {
-	$.ajax({
-	type: "POST",
-	url: "get_subcat.php",
-	data:'cat_id='+val,
-	success: function(data){
-		$("#subcategory").html(data);
-	}
-	});
-}
-function selectCountry(val) {
-$("#search-box").val(val);
-$("#suggesstion-box").hide();
-}
-</script>	
+		function getSubcat(val) {
+			$.ajax({
+			type: "POST",
+			url: "get_subcat.php",
+			data:'cat_id='+val,
+			success: function(data){
+				$("#subcategory").html(data);
+			}
+			});
+		}
+		function selectCountry(val) {
+		$("#search-box").val(val);
+		$("#suggesstion-box").hide();
+		}
+	</script>	
 
 
 </head>
