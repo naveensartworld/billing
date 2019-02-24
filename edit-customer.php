@@ -18,7 +18,7 @@ else{
 		$phone = !empty($_POST['phone'])?$_POST['phone']:NULL;
 		$city = !empty($_POST['city'])?$_POST['city']:NULL;
 		$country = !empty($_POST['country'])?$_POST['country']:NULL;
-		$active=!empty($_POST['status'])?$_POST['status']:1;
+		$active=$_POST['astatus'];
 		$deleted=0;
 		$date = date("Y-m-d H:i:s");
 		$sqlQuery =mysqli_query($con,"select row_id from Customers where email = '".$email."'");
@@ -162,8 +162,8 @@ $row = mysqli_fetch_assoc($query)
                                               <div class="form-group">
                                                 <label class="control-label" for="basicinput">Status</label>
                                                 
-                                                 <input type="radio"  name="status" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>> Active
-                                                  <input type="radio"  name="status" value="0" <?php if($row['active']=='0') { ?>  checked <?php } ?> > Inactive
+                                                 <input type="radio"  name="astatus" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>> Active
+                                                  <input type="radio"  name="astatus" value="0" <?php if($row['active']=='0') { ?>  checked <?php } ?> > Inactive
                                             </div>
                                             <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                            
