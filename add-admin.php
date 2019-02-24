@@ -13,48 +13,38 @@ else{
 		$first_name = !empty($_POST['first_name'])?$_POST['first_name']:NULL; 
 		$last_name = !empty($_POST['last_name'])?$_POST['last_name']:NULL;
 		$email = !empty($_POST['email'])?$_POST['email']:NULL;
-		$hiddenemail = $_POST['hiddenemail'];
 		$password = !empty($_POST['password'])?$_POST['password']:NULL;
 		$phone = !empty($_POST['phone'])?$_POST['phone']:NULL;
 		$city = !empty($_POST['city'])?$_POST['city']:NULL;
 		$country = !empty($_POST['country'])?$_POST['country']:NULL;
-		$active=$_POST['astatus'];
-		$date = date("Y-m-d H:i:s");
+		$active=!empty($_POST['active'])?$_POST['active']:1;
 		$deleted=0;
 		$date = date("Y-m-d H:i:s");
 		$sqlQuery =mysqli_query($con,"select row_id from Customers where email = '".$email."'");
 		$updated_by = $_SESSION['id'];
 		$num=mysqli_fetch_array($sqlQuery);
-		if($num>0 and $email!=$hiddenemail){
+		if($num>0){
 			$_SESSION['msg']="Customer with this email address already exists !!";
 		}
 		else
 		{
-
-			
-			$sql=mysqli_query($con,"update  customers set first_name = '$first_name',last_name='$last_name',email='$email',phone = '$phone',city = '$city',country ='$country',active = '$active',last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
-			
-			if($password!=''){
-				$password = md5($password);
-				$sql=mysqli_query($con,"update  customers set password = '$password', last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
-			}
-			$_SESSION['msg']="Customer Updated Successfully !!";
-			header("Location:manage-users.php?update=y");
-		
+			$doc_type = 'cust_code';
+			$sequence = getHighKey($doc_type,$con);
+			$sql=mysqli_query($con,"insert into Customers(first_name,last_name,cus_code,email,password,phone,city,country,active,create_date,create_by,last_modify_date,last_modify_by,deleted) values('$first_name','$last_name','$sequence','$email','$password','$phone','$city','$country','$active', '$date','$updated_by','$date','$updated_by','$deleted')");
+			$_SESSION['msg']="Customer Inserted Successfully !!";
+			header("Location:manage-users.php");
 		}
 	}
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Customers || Update Customer</title>
+    <title>Customers || Add Customer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include_once("include/header.php"); ?>
   
-
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -85,13 +75,24 @@ else{
         <div class="main-content">
             <!-- header area start -->
             
-    	
+            <!-- header area end -->
+            <!-- page title area start -->
+      		<div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix" style="padding:30px;">
+                            <h4 class="page-title pull-left">Add Customer</h4>
+                       </div>
+                    </div>
+          
+                </div>
+            </div>
             <!-- page title area end -->
             <div class="main-content-inner">
             	<div class="col-12 mt-5">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="header-title">Update Customer</h4>
+                                        <h4 class="header-title">Add Customer</h4>
                                         <?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
                                         <div class="alert alert-danger" role="alert" style="margin::0 0 10px 0;">
                                                <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
@@ -103,44 +104,39 @@ else{
                                          </div>
                                         <?php } ?>
                                         <form class="needs-validation" novalidate="" autocomplete="off" name="insertCustomer" onSubmit="return valid();" method="post" enctype="multipart/form-data">
-                                        <?php
-$query=mysqli_query($con,"select * from customers WHERE  row_id='".decrypt($_GET['id'])."'");
-$row = mysqli_fetch_assoc($query)
-?>
 										
                                             <div class="form-group">
                                                 <label for="fname">First Name</label>
-                                                <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" id="fname" placeholder="Enter First Name" class="form-control" required>
+                                                <input type="text" name="first_name" value="<?php echo $_POST['first_name']; ?>" id="fname" placeholder="Enter First Name" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Last Name</label>
-                                                <input type="text"    name="last_name" value="<?php echo $row['last_name']; ?>"   placeholder="Enter Last Name" class="form-control" required>
+                                                <input type="text"    name="last_name" value="<?php echo $_POST['last_name']; ?>"   placeholder="Enter Last Name" class="form-control" required>
                                                
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Email</label> 
-                                                <input type="email"    name="email" value="<?php echo $row['email']; ?>"   placeholder="Enter Email" class="form-control" >	
-                                                <input type="hidden"    name="hiddenemail" value="<?php echo $row['email']; ?>"   class="form-control" >	
+                                                <input type="email"    name="email" value="<?php echo $_POST['email']; ?>"   placeholder="Enter Email" class="form-control" required>	
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Password</label>
                                                  <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
 							<input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
-                                                <input type="Password"    name="password"  placeholder="Enter Password" class="form-control" >	
+                                                <input type="Password"    name="password"  placeholder="Enter Password" class="form-control" required>	
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Confirm Password</label>
-                                                <input type="Password"    name="cpassword"  placeholder="Enter Password Again" onBlur="javascript:valid();" class="form-control" >
+                                                <input type="Password"    name="cpassword"  placeholder="Enter Password Again" onBlur="javascript:valid();" class="form-control" required>
                                                 <div class="invalid-feedback" id="invalid_feedback" style="display:none;">Password and Confirm Password Field do not match  !!	</div>	
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Phone</label>
-                                                 <input type="text"    name="phone" value="<?php echo $row['phone']; ?>"  placeholder="Enter Phone" class="form-control" required>
+                                                 <input type="text"    name="phone" value="<?php echo $_POST['phone']; ?>"  placeholder="Enter Phone" class="form-control" required>
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">City</label>
-                                                 <input type="text"    name="city" value="<?php echo $row['city']; ?>"  placeholder="Enter City" class="form-control" required>
+                                                 <input type="text"    name="city" value="<?php echo $_POST['city']; ?>"  placeholder="Enter City" class="form-control" required>
                                             </div>
                                               <div class="form-group">
                                                 <label class="control-label" for="basicinput">Country</label>
@@ -153,7 +149,7 @@ $row = mysqli_fetch_assoc($query)
 													{ ?>
                                                     	<option value="<?php echo $data['row_id']; ?>" 
                                                         	<?php 
-																if($data['row_id']==$row['country']){
+																if($data['row_id']==$_POST['country']){
 																	echo 'selected="selected"';	
 																}
 															?>
@@ -161,12 +157,6 @@ $row = mysqli_fetch_assoc($query)
                                                     <?php } ?>
                                                 </select>
                                                 
-                                            </div>
-                                              <div class="form-group">
-                                                <label class="control-label" for="basicinput">Status</label>
-                                                
-                                                 <input type="radio"  name="astatus" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>> Active
-                                                  <input type="radio"  name="astatus" value="0" <?php if($row['active']=='0') { ?>  checked <?php } ?> > Inactive
                                             </div>
                                             <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                            
@@ -191,7 +181,7 @@ $row = mysqli_fetch_assoc($query)
 	function valid()
 	{
 		
-		if(document.insertCustomer.password.value!= document.insertCustomer.cpassword.value && document.insertCustomer.password.value!='')
+		if(document.insertCustomer.password.value!= document.insertCustomer.cpassword.value)
 		{
 			$("#invalid_feedback").html("Password and Confirm Password Field do not match  !!");
 			$("#invalid_feedback").show();
