@@ -1,9 +1,6 @@
 <nav>
                         <ul class="metismenu" id="menu">
-                            <li>
-                                <a href="javascript:void(0)" ><span>Change Password</span></a>
-                              
-                            </li>
+                            
 							 <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Admin
                                         
@@ -28,8 +25,16 @@
                                     </span></a>
                                 <ul class="collapse">
                                     <li><a href="add_period.php">Add Period</a></li>
-                                    <li><a href="manage-users.php">Manage Periods</a></li>
+                                    <li><a href="manage_periods.php">Manage Periods</a></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="change-password.php" ><span>Change Password</span></a>
+                              
+                            </li>
+                            <li>
+                                <a href="logout.php" ><span>Logout</span></a>
+                              
                             </li>
                             <!--<li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>
