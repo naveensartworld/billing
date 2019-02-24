@@ -32,7 +32,7 @@ else{
 			$sequence = getHighKey($doc_type,$con);
 			$sql=mysqli_query($con,"insert into Customers(first_name,last_name,cus_code,email,password,phone,city,country,active,create_date,create_by,last_modify_date,last_modify_by,deleted) values('$first_name','$last_name','$sequence','$email','$password','$phone','$city','$country','$active', '$date','$updated_by','$date','$updated_by','$deleted')");
 			$_SESSION['msg']="Customer Inserted Successfully !!";
-			header("Location:manage-users.php");
+			header("Location:manage-users.php?insert=y");
 		}
 	}
 ?>
@@ -75,18 +75,7 @@ else{
         <div class="main-content">
             <!-- header area start -->
             
-            <!-- header area end -->
-            <!-- page title area start -->
-      		<div class="page-title-area">
-                <div class="row align-items-center">
-                    <div class="col-sm-6">
-                        <div class="breadcrumbs-area clearfix" style="padding:30px;">
-                            <h4 class="page-title pull-left">Add Customer</h4>
-                       </div>
-                    </div>
-          
-                </div>
-            </div>
+        
             <!-- page title area end -->
             <div class="main-content-inner">
             	<div class="col-12 mt-5">

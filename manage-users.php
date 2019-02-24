@@ -68,9 +68,19 @@ else{
                         <div class="card">
                             <div class="card-body">
                                 <h2 class="header-title">Manage Customers</h2>
-                                <?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
+                                	<?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
                                     <div class="alert alert-success" role="success" style="margin::0 0 10px 0;">
                                            <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
+                                     </div>
+                                    <?php } ?>
+                                    <?php if(isset($_GET['insert']) and $_GET['insert']!='') { ?>
+                                    <div class="alert alert-success" role="success" style="margin::0 0 10px 0;">
+                                           Records inserted successfully.
+                                     </div>
+                                    <?php } ?>
+                                      <?php if(isset($_GET['update']) and $_GET['update']!='') { ?>
+                                    <div class="alert alert-success" role="success" style="margin::0 0 10px 0;">
+                                           Records updated successfully.
                                      </div>
                                     <?php } ?>
                                 <div class="data-tables datatable-dark">
