@@ -34,6 +34,7 @@ else{
 			$sql=mysqli_query($con,"update  customers set first_name = '$first_name',last_name='$last_name',email='$email',phone = '$phone',city = '$city',country ='$country',active = '$active',last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
 			
 			if($password!=''){
+				$password = md5($password);
 				$sql=mysqli_query($con,"update  customers set password = '$password', last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
 			}
 		$_SESSION['msg']="Customer Updated Successfully !!";

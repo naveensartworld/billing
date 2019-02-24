@@ -2,7 +2,7 @@
                         <ul class="metismenu" id="menu">
                             
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Custumer
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Customer
                                         
                                     </span></a>
                                 <ul class="collapse">
