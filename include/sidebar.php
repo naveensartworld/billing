@@ -28,6 +28,15 @@
                                     <li><a href="manage_periods.php">Manage Periods</a></li>
                                 </ul>
                             </li>
+                             <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Paymodes
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add_paymodes.php">Add Paymodes</a></li>
+                                    <li><a href="manage_paymodes.php">Manage Paymodes</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="change-password.php" ><span>Change Password</span></a>
                               
