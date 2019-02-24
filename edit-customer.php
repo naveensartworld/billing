@@ -37,8 +37,8 @@ else{
 				$password = md5($password);
 				$sql=mysqli_query($con,"update  customers set password = '$password', last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
 			}
-		$_SESSION['msg']="Customer Updated Successfully !!";
-		header("Location:manage-users.php?update=y");
+			$_SESSION['msg']="Customer Updated Successfully !!";
+			header("Location:manage-users.php?update=y");
 		
 		}
 	}

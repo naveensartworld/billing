@@ -7,7 +7,16 @@
                                     </span></a>
                                 <ul class="collapse">
                                     <li><a href="add-customer.php">Add Customer</a></li>
-                                    <li><a href="manage-users.php">Manage Customer</a></li>
+                                    <li><a href="manage-users.php">Manage Customers</a></li>
+                                </ul>
+                            </li>
+                             <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Periods
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add_period.php">Add Period</a></li>
+                                    <li><a href="manage-users.php">Manage Periods</a></li>
                                 </ul>
                             </li>
                             <li>
