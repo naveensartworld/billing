@@ -31,10 +31,10 @@ else{
 		{
 
 			
-			$sql=mysqli_query($con,"update  customers set first_name = '$first_name',last_name='$last_name',email='$email',phone = '$phone',city = '$city',country ='$country',active = '$active',last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".$_GET['id']."'");
+			$sql=mysqli_query($con,"update  customers set first_name = '$first_name',last_name='$last_name',email='$email',phone = '$phone',city = '$city',country ='$country',active = '$active',last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
 			
 			if($password!=''){
-				$sql=mysqli_query($con,"update  customers set password = '$password', last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".$_GET['id']."'");
+				$sql=mysqli_query($con,"update  customers set password = '$password', last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'");
 			}
 		$_SESSION['msg']="Customer Updated Successfully !!";
 		header("Location:manage-users.php?update=y");
@@ -100,7 +100,7 @@ else{
                                         <?php } ?>
                                         <form class="needs-validation" novalidate="" autocomplete="off" name="insertCustomer" onSubmit="return valid();" method="post" enctype="multipart/form-data">
                                         <?php
-$query=mysqli_query($con,"select * from customers WHERE  row_id='".$_GET['id']."'");
+$query=mysqli_query($con,"select * from customers WHERE  row_id='".decrypt($_GET['id'])."'");
 $row = mysqli_fetch_assoc($query)
 ?>
 										

@@ -25,4 +25,16 @@ function getHighKey($doc_type,$con){
 function dateFormat($date_format){
 	return date('d-M-Y H:i A',strtotime($date_format));
 }
+
+
+function encrypt($sData){
+$id=(double)$sData*525325.24;
+return base64_encode($id);
+}
+
+function decrypt($sData){
+$url_id=base64_decode($sData);
+$id=(double)$url_id/525325.24;
+return $id;
+}
 ?>

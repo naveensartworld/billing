@@ -11,7 +11,7 @@ else{
   {
 	  //	echo 'test';exit;
 	//  echo "update customers set deleted = 1 where row_id = '".$_GET['id']."'";exit;
-		  mysqli_query($con,"update customers set deleted = 1 where row_id = '".$_GET['id']."'");
+		  mysqli_query($con,"update customers set deleted = 1 where row_id = '".decrypt($_GET['id'])."'");
 		  $_SESSION['msg']="Customer deleted successfully!!";
   }
 
@@ -116,7 +116,7 @@ while($row = mysqli_fetch_array($query))
                                                 <td><?php  if($row['active']=='1') { echo 'Active'; }  else { echo 'Inactive'; } ?></td>
                                                 <td><?php echo dateFormat($row['create_date']); ?></td>
                                                 <td><?php echo dateFormat($row['last_modify_date']); ?></td>
-                                                <td><a href="edit-customer.php?id=<?php echo $row['row_id']?>">Edit</a> / <a href="?id=<?php echo $row['row_id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+                                                <td><a href="edit-customer.php?id=<?php echo encrypt($row['row_id']); ?>">Edit</a> / <a href="?id=<?php echo encrypt($row['row_id']);?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Delete</a></td>
                                             </tr>
                                            <?php } ?>
                                         </tbody>
