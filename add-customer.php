@@ -32,7 +32,7 @@ else{
 			$sequence = getHighKey($doc_type,$con);
 			$sql=mysqli_query($con,"insert into Customers(first_name,last_name,cus_code,email,password,phone,city,country,active,create_date,create_by,last_modify_date,last_modify_by,deleted) values('$first_name','$last_name','$sequence','$email','$password','$phone','$city','$country','$active', '$date','$updated_by','$date','$updated_by','$deleted')");
 			$_SESSION['msg']="Customer Inserted Successfully !!";
-			header("Location:change-password.php");
+			header("Location:manage-users.php");
 		}
 	}
 ?>
