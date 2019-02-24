@@ -55,6 +55,15 @@
                                     <li><a href="manage_countries.php">Manage Countries</a></li>
                                 </ul>
                             </li>
+                                <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Currencies
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add_currency.php">Add Currency</a></li>
+                                    <li><a href="manage_currency.php">Manage Currencies</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="change-password.php" ><span>Change Password</span></a>
                               
