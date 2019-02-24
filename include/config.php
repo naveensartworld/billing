@@ -22,4 +22,7 @@ function getHighKey($doc_type,$con){
 	return $sequence;
 }
 
+function dateFormat($date_format){
+	return date('d-M-Y H:i A',strtotime($date_format));
+}
 ?>

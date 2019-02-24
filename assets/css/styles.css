@@ -94,8 +94,11 @@
 }
 
 .main-content-inner {
-    padding: 0 30px 50px;
+    padding: 0 10px;
 }
+.main-content-inner .mt-5, .my-5{
+	margin:0px !important;
+} 
 
 /*------------------------- END Core Css -------------------*/
 

@@ -101,11 +101,7 @@
             responsive: true
         });
     }
-    if ($('#dataTable3').length) {
-        $('#dataTable3').DataTable({
-            responsive: true
-        });
-    }
+
 
 
     /*================================

@@ -1,128 +1,167 @@
-
 <?php
 session_start();
+
 include('include/config.php');
 if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
+{	
+	header('location:index.php');
 }
 else{
-date_default_timezone_set('Asia/Kolkata');// change according timezone
-$currentTime = date( 'd-m-Y h:i:s A', time () );
+ if(isset($_GET['del']))
+  {
+	  //	echo 'test';exit;
+	//  echo "update customers set deleted = 1 where row_id = '".$_GET['id']."'";exit;
+		  mysqli_query($con,"update customers set deleted = 1 where row_id = '".$_GET['id']."'");
+		  $_SESSION['msg']="Customer deleted successfully!!";
+  }
 
-if(isset($_GET['del']))
-		  {
-		          mysqli_query($con,"delete from customers where id = '".$_GET['id']."'");
-                  $_SESSION['delmsg']="Customer deleted !!";
-		  }
-
+	
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin| Manage Users</title>
-	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link type="text/css" href="css/theme.css" rel="stylesheet">
-	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
-	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Customers || Manage Customers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php include_once("include/header.php"); ?>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+ 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
 </head>
 <body>
-<?php include('include/header.php');?>
-
-	<div class="wrapper">
-		<div class="container">
-			<div class="row">
-<?php include('include/sidebar.php');?>				
-			<div class="span9">
-					<div class="content">
-
-	<div class="module">
-							<div class="module-head">
-								<h3>Manage Users</h3>
-							</div>
-							<div class="module-body table">
-	<?php if(isset($_GET['del']))
-{?>
-									<div class="alert alert-error">
-										<button type="button" class="close" data-dismiss="alert">×</button>
-									<strong>Oh snap!</strong> 	<?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?>
-									</div>
-<?php } ?>
-
-									<br />
-
-							
-								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Name</th>
-											<th>Email </th>
-											<th>Contact no</th>
-											<th>City</th>
-											<th>Country </th>
-											<th>Reg. Date </th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-
-<?php $query=mysqli_query($con,"select * from customers");
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <?php include("include/sidebar.php"); ?>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            
+            <!-- header area end -->
+           
+            <!-- page title area end -->
+            <div class="main-content-inner">
+            	   <!-- Dark table start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="header-title">Manage Customers</h2>
+                                <?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
+                                    <div class="alert alert-success" role="success" style="margin::0 0 10px 0;">
+                                           <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
+                                     </div>
+                                    <?php } ?>
+                                <div class="data-tables datatable-dark">
+                                    <table id="dataTable3" class="text-center">
+                                        <thead class="text-capitalize">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Cust Code</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                                <th>Status</th>
+                                                <th>Created Date</th>
+                                                <th>Modified Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        <?php $query=mysqli_query($con,"select c.*,co.country_name from customers as c left join countries as co on (co.row_id=c.country) where c.deleted = 0 order by row_id desc");
 $cnt=1;
-
-
-// if(empty($row))
-// {
-	
-
 while($row = mysqli_fetch_array($query))
 {
-?>									
-										<tr>
-											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($row['first_name']. ' ' . $row['last_name']);?></td>
-											<td><?php echo htmlentities($row['email']);?></td>
-											<td> <?php echo htmlentities($row['phone']);?></td>
-											<td><?php echo htmlentities($row['city']);?></td>
-											<td><?php echo htmlentities($row['country']);?></td>
-											<td><?php echo htmlentities($row['create_date']);?></td>
-											<td>
-											<a href="edit-customer.php?id=<?php echo $row['id']?>" ><i class="icon-edit">edit</i></a>
-											<a href="manage-custom.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">del<i class="icon-remove-sign"></i></a></td>
-										<?php $cnt=$cnt+1; } 
-										// }
-										?>
-										
-								</table>
-							</div>
-						</div>						
-
-						
-						
-					</div><!--/.content-->
-				</div><!--/.span9-->
-			</div>
-		</div><!--/.container-->
-	</div><!--/.wrapper-->
-
-<?php include('include/footer.php');?>
-
-	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-	<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
-	<script src="scripts/datatables/jquery.dataTables.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('.datatable-1').dataTable();
-			$('.dataTables_paginate').addClass("btn-group datatable-pagination");
-			$('.dataTables_paginate > a').wrapInner('<span />');
-			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
-			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
-		} );
-	</script>
+?>	
+                                            <tr>
+                                                <td><?php echo htmlentities($row['first_name']. ' ' . $row['last_name']);?></td>
+                                                <td><?php echo htmlentities($row['cus_code']);?></td>
+                                                <td><?php echo htmlentities($row['email']);?></td>
+                                                <td><?php echo htmlentities($row['phone']);?></td>
+                                                <td><?php echo htmlentities($row['city']);?></td>
+                                                <td><?php echo htmlentities($row['country_name']);?></td>
+                                                <td><?php  if($row['active']=='1') { echo 'Active'; }  else { echo 'Inactive'; } ?></td>
+                                                <td><?php echo dateFormat($row['create_date']); ?></td>
+                                                <td><?php echo dateFormat($row['last_modify_date']); ?></td>
+                                                <td><a href="edit-customer.php?id=<?php echo $row['row_id']?>">Edit</a> / <a href="?id=<?php echo $row['row_id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+                                            </tr>
+                                           <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dark table end -->
+       	 </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Copyright <?php echo date("Y"); ?>. All right reserved.</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
+     </div>
 </body>
+<?php include_once("include/footer.php"); ?>
+    <!-- Start datatable js -->
+    
+  <!-- Start datatable js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script src="assets/js/scripts.js"></script>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+      if ($('#dataTable3').length) {
+        $('#dataTable3').DataTable({
+            responsive: true, 
+			"order": [[ 7, "desc" ]]
+        });
+    }
+	 });
+	function valid()
+	{
+		
+		if(document.insertCustomer.password.value!= document.insertCustomer.cpassword.value)
+		{
+			$("#invalid_feedback").html("Password and Confirm Password Field do not match  !!");
+			$("#invalid_feedback").show();
+			$("#exampleInputPassword2").attr("style","border-color: #dc3545");
+			document.insertCustomer.password.focus();
+			return false;
+		}
+		else{
+			$("#invalid_feedback").hide();
+		}
+		return true;
+	}
+</script>
+</html>
 <?php } ?>
