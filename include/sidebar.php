@@ -1,6 +1,18 @@
 <nav>
                         <ul class="metismenu" id="menu">
-                            
+                            <li>
+                                <a href="javascript:void(0)" ><span>Change Password</span></a>
+                              
+                            </li>
+							 <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Admin
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add-admin.php">Add Admin</a></li>
+                                    <li><a href="manage-admin.php">Manage Admin</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Custumer
                                         
@@ -9,14 +21,6 @@
                                     <li><a href="add-customer.php">Add Customer</a></li>
                                     <li><a href="manage-users.php">Manage Customer</a></li>
                                 </ul>
-                            </li>
-                            <li>
-                                <a href="change-password.php" ><span>Change Password</span></a>
-                              
-                            </li>
-                            <li>
-                                <a href="logout.php" ><span>Logout</span></a>
-                              
                             </li>
                             <!--<li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>

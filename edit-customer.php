@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 	
+=======
+>>>>>>> d158f1c30be01cad7ccf9f79f18dd3b63903622a
 <?php
 session_start();
+
 include('include/config.php');
 if(strlen($_SESSION['alogin'])==0)
 {	
 	header('location:index.php');
 }
+<<<<<<< HEAD
 else
 {
 	$pid=intval($_GET['id']);// product id
@@ -15,10 +20,21 @@ else
 		$first_name = !empty($_POST['first_name'])?$_POST['first_name']:NULL; 
 		$last_name = !empty($_POST['last_name'])?$_POST['last_name']:NULL;
 		$email = !empty($_POST['email'])?$_POST['email']:NULL;
+=======
+else{
+	
+	if(isset($_POST['submit']))
+	{
+		$first_name = !empty($_POST['first_name'])?$_POST['first_name']:NULL; 
+		$last_name = !empty($_POST['last_name'])?$_POST['last_name']:NULL;
+		$email = !empty($_POST['email'])?$_POST['email']:NULL;
+		$hiddenemail = $_POST['hiddenemail'];
+>>>>>>> d158f1c30be01cad7ccf9f79f18dd3b63903622a
 		$password = !empty($_POST['password'])?$_POST['password']:NULL;
 		$phone = !empty($_POST['phone'])?$_POST['phone']:NULL;
 		$city = !empty($_POST['city'])?$_POST['city']:NULL;
 		$country = !empty($_POST['country'])?$_POST['country']:NULL;
+<<<<<<< HEAD
 		$active=!empty($_POST['active'])?$_POST['active']:NULL;
 		$date = date("Y-m-d H:i:s");
 		$sql=mysqli_query($con,"update  customers set  first_name = '$first_name',last_name='$last_name',email='$email',password='$password', phone = '$phone',city = '$city',country ='$country',active = '$active',  last_modify_date = '$date'  where id='$pid' ");
@@ -30,10 +46,36 @@ else
 	}
 
 
+=======
+		$active=!empty($_POST['status'])?$_POST['status']:1;
+		$deleted=0;
+		$date = date("Y-m-d H:i:s");
+		$sqlQuery =mysqli_query($con,"select row_id from Customers where email = '".$email."'");
+		$updated_by = $_SESSION['id'];
+		$num=mysqli_fetch_array($sqlQuery);
+		if($num>0 and $email!=$hiddenemail){
+			$_SESSION['msg']="Customer with this email address already exists !!";
+		}
+		else
+		{
+
+			
+			$sql=mysqli_query($con,"update  customers set first_name = '$first_name',last_name='$last_name',email='$email',phone = '$phone',city = '$city',country ='$country',active = '$active',last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".$_GET['id']."'");
+			
+			if($password!=''){
+				$sql=mysqli_query($con,"update  customers set password = '$password', last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".$_GET['id']."'");
+			}
+		$_SESSION['msg']="Customer Updated Successfully !!";
+		header("Location:manage-users.php?update=y");
+		
+		}
+	}
+>>>>>>> d158f1c30be01cad7ccf9f79f18dd3b63903622a
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
+<<<<<<< HEAD
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin| Insert Customer</title>
@@ -63,131 +105,163 @@ else
 	</script>	
 
 
+=======
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Customers || Update Customer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php include_once("include/header.php"); ?>
+  
+>>>>>>> d158f1c30be01cad7ccf9f79f18dd3b63903622a
 </head>
 <body>
-<?php include('include/header.php');?>
-
-	<div class="wrapper">
-		<div class="container">
-			<div class="row">
-<?php include('include/sidebar.php');?>				
-			<div class="span9">
-					<div class="content">
-
-						<div class="module">
-							<div class="module-head">
-								<h3>Insert Customer</h3>
-							</div>
-							<div class="module-body">
-
-									<?php if(isset($_POST['submit']))
-{?>
-									<div class="alert alert-success">
-										<button type="button" class="close" data-dismiss="alert">×</button>
-									<strong>Well done!</strong>	<?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?>
-									</div>
-<?php } ?>
-
-
-									<?php if(isset($_GET['del']))
-{?>
-									<div class="alert alert-error">
-										<button type="button" class="close" data-dismiss="alert">×</button>
-									<strong>Oh snap!</strong> 	<?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?>
-									</div>
-<?php } ?>
-
-									<br />
-
-			<form class="form-horizontal row-fluid" name="insertCustomer" method="post" enctype="multipart/form-data">
-<?php
-$query=mysqli_query($con,"select * from customers WHERE  id='$pid'");
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <?php include("include/sidebar.php"); ?>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            
+    	
+            <!-- page title area end -->
+            <div class="main-content-inner">
+            	<div class="col-12 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Update Customer</h4>
+                                        <?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
+                                        <div class="alert alert-danger" role="alert" style="margin::0 0 10px 0;">
+                                               <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
+                                         </div>
+                                        <?php } ?>
+                                        <?php if(isset($_SESSION['smsg']) and $_SESSION['smsg']!='') { ?>
+                                     	 <div class="alert alert-success" role="alert"  style="margin::0 0 10px 0;">
+                                               <?php echo htmlentities($_SESSION['smsg']); ?><?php echo htmlentities($_SESSION['smsg']="");?>
+                                         </div>
+                                        <?php } ?>
+                                        <form class="needs-validation" novalidate="" autocomplete="off" name="insertCustomer" onSubmit="return valid();" method="post" enctype="multipart/form-data">
+                                        <?php
+$query=mysqli_query($con,"select * from customers WHERE  row_id='".$_GET['id']."'");
 $row = mysqli_fetch_assoc($query)
 ?>
-				<div class="control-group">
-					<label class="control-label" for="basicinput">First Name</label>
-					<div class="controls">
-						<input type="text" value="<?= $row['first_name'];?>"   name="first_name"  placeholder="Enter First Name" class="span8 tip" required>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="basicinput">Last Name</label>
-					<div class="controls">
-						<input type="text" value="<?= $row['first_name'];?>"   name="last_name"  placeholder="Enter LAst Name" class="span8 tip" required>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="basicinput">Email</label>
-					<div class="controls">
-						<input type="text" value="<?= $row['email'];?>"   name="email"  placeholder="Enter Email" class="span8 tip" required>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="basicinput">Password</label>
-					<div class="controls">
-						<input type="text"  value=""  name="password"  placeholder="Enter PAssword" class="span8 tip" required>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="basicinput">Phone</label>
-					<div class="controls">
-						<input type="text" value="<?= $row['phone'];?>"   name="phone"  placeholder="Enter Phone" class="span8 tip" required>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="basicinput">City</label>
-					<div class="controls">
-						<input type="text"  value="<?= $row['city'];?>"  name="city"  placeholder="Enter City" class="span8 tip" required>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label"  for="basicinput">Country</label>
-					<div class="controls">
-					<input type="text"  value="<?= $row['country'];?>"  name="country"  placeholder="Enter Country" class="span8 tip" required>
-					</div>
-				</div>
-
-
-
-	<div class="control-group">
-		<div class="controls">
-			<button type="submit" name="submit" class="btn">Update Customer</button>
-		</div>
-	</div>
-	</form>
-		</div>
-	</div>
-
-
-	
-						
-						
-					</div><!--/.content-->
-				</div><!--/.span9-->
-			</div>
-		</div><!--/.container-->
-	</div><!--/.wrapper-->
-
-<?php include('include/footer.php');?>
-
-	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-	<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
-	<script src="scripts/datatables/jquery.dataTables.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('.datatable-1').dataTable();
-			$('.dataTables_paginate').addClass("btn-group datatable-pagination");
-			$('.dataTables_paginate > a').wrapInner('<span />');
-			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
-			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
-		} );
-	</script>
+										
+                                            <div class="form-group">
+                                                <label for="fname">First Name</label>
+                                                <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" id="fname" placeholder="Enter First Name" class="form-control" required>
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="basicinput">Last Name</label>
+                                                <input type="text"    name="last_name" value="<?php echo $row['last_name']; ?>"   placeholder="Enter Last Name" class="form-control" required>
+                                               
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="basicinput">Email</label> 
+                                                <input type="email"    name="email" value="<?php echo $row['email']; ?>"   placeholder="Enter Email" class="form-control" >	
+                                                <input type="hidden"    name="hiddenemail" value="<?php echo $row['email']; ?>"   class="form-control" >	
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label" for="basicinput">Password</label>
+                                                 <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
+							<input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
+                                                <input type="Password"    name="password"  placeholder="Enter Password" class="form-control" >	
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="basicinput">Confirm Password</label>
+                                                <input type="Password"    name="cpassword"  placeholder="Enter Password Again" onBlur="javascript:valid();" class="form-control" >
+                                                <div class="invalid-feedback" id="invalid_feedback" style="display:none;">Password and Confirm Password Field do not match  !!	</div>	
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label" for="basicinput">Phone</label>
+                                                 <input type="text"    name="phone" value="<?php echo $row['phone']; ?>"  placeholder="Enter Phone" class="form-control" required>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label" for="basicinput">City</label>
+                                                 <input type="text"    name="city" value="<?php echo $row['city']; ?>"  placeholder="Enter City" class="form-control" required>
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="control-label" for="basicinput">Country</label>
+                                                <select name ="country" class="form-control" required> 
+                                                	<option value="">Select Country</option>
+                                                	<?php 
+													 $sqlQuery = 'select row_id,country_name from countries where active ="1"';
+													 $result = mysqli_query($con,$sqlQuery);
+													 while($data = mysqli_fetch_array($result))
+													{ ?>
+                                                    	<option value="<?php echo $data['row_id']; ?>" 
+                                                        	<?php 
+																if($data['row_id']==$row['country']){
+																	echo 'selected="selected"';	
+																}
+															?>
+                                                       	 ><?php echo $data['country_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="control-label" for="basicinput">Status</label>
+                                                
+                                                 <input type="radio"  name="status" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>> Active
+                                                  <input type="radio"  name="status" value="0" <?php if($row['active']=='0') { ?>  checked <?php } ?> > Inactive
+                                            </div>
+                                            <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
+                                           
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+       	 </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Copyright <?php echo date("Y"); ?>. All right reserved.</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
 </body>
+<?php include_once("include/footer.php"); ?>
+  <script type="text/javascript">
+	function valid()
+	{
+		
+		if(document.insertCustomer.password.value!= document.insertCustomer.cpassword.value && document.insertCustomer.password.value!='')
+		{
+			$("#invalid_feedback").html("Password and Confirm Password Field do not match  !!");
+			$("#invalid_feedback").show();
+			$("#exampleInputPassword2").attr("style","border-color: #dc3545");
+			document.insertCustomer.password.focus();
+			return false;
+		}
+		else{
+			$("#invalid_feedback").hide();
+		}
+		return true;
+	}
+</script>
+</html>
 <?php } ?>
