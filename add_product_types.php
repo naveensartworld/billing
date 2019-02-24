@@ -79,12 +79,12 @@ else{
 										
                                             <div class="form-group">
                                                 <label for="fname">Product Type</label>
-                                                <input type="text" name="ptype" value="<?php echo $_POST['ptype']; ?>" id="fname" placeholder="Product Type" class="form-control" required>
+                                                <input type="text" name="ptype" value="<?php if(isset($_POST['ptype']))  echo $_POST['ptype']; ?>" id="fname" placeholder="Product Type" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Description</label>
-                                                <input type="text"    name="description" value="<?php echo $_POST['description']; ?>"   placeholder="Enter Description" class="form-control" required>
+                                                <input type="text"    name="description" value="<?php if(isset($_POST['description'])) echo $_POST['description']; ?>"   placeholder="Enter Description" class="form-control" required>
                                                
                                             </div>
                                             

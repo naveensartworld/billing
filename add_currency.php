@@ -80,12 +80,12 @@ else{
 										
                                             <div class="form-group">
                                                 <label for="fname">Currency Name</label>
-                                                <input type="text" name="cname" value="<?php echo $_POST['cname']; ?>" id="fname" placeholder="Currency Name" class="form-control" required>
+                                                <input type="text" name="cname" value="<?php if(isset($_POST['cname'])) echo $_POST['cname']; ?>" id="fname" placeholder="Currency Name" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Currency Code</label>
-                                                <input type="text"    name="ccode" value="<?php echo $_POST['ccode']; ?>"   placeholder="Enter Currency Code" class="form-control" required>
+                                                <input type="text"    name="ccode" value="<?php if(isset($_POST['ccode'])) echo $_POST['ccode']; ?>"   placeholder="Enter Currency Code" class="form-control" required>
                                                
                                             </div>
                                             
@@ -101,8 +101,11 @@ else{
 													{ ?>
                                                     	<option value="<?php echo $data['row_id']; ?>" 
                                                         	<?php 
-																if($data['row_id']==$_POST['country']){
-																	echo 'selected="selected"';	
+																if(isset($_POST['country']))
+																{
+																	if($data['row_id'] == $_POST['country']){
+																		echo 'selected="selected"';	
+																	}
 																}
 															?>
                                                        	 ><?php echo $data['country_name']; ?></option>

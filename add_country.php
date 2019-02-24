@@ -79,12 +79,12 @@ else{
 										
                                             <div class="form-group">
                                                 <label for="fname">Country Name</label>
-                                                <input type="text" name="cname" value="<?php echo $_POST['cname']; ?>" id="fname" placeholder="Enter Country Name" class="form-control" required>
+                                                <input type="text" name="cname" value="<?php if(isset($_POST['cname'])) echo $_POST['cname']; ?>" id="fname" placeholder="Enter Country Name" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Country Code</label>
-                                                <input type="text"    name="ccode" value="<?php echo $_POST['ccode']; ?>"   placeholder="Enter Country Code" class="form-control" required>
+                                                <input type="text"    name="ccode" value="<?php if(isset($_POST['ccode'])) echo $_POST['ccode']; ?>"   placeholder="Enter Country Code" class="form-control" required>
                                                
                                             </div>
                                             

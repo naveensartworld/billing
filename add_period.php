@@ -80,19 +80,19 @@ else{
 										
                                             <div class="form-group">
                                                 <label for="fname">Period Name</label>
-                                                <input type="text" name="pname" value="<?php echo $_POST['pname']; ?>" id="fname" placeholder="Period Name" class="form-control" required>
+                                                <input type="text" name="pname" value="<?php if(isset($_POST['pname'])) echo $_POST['pname']; ?>" id="fname" placeholder="Period Name" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Description</label>
-                                                <input type="text"    name="description" value="<?php echo $_POST['description']; ?>"   placeholder="Enter Description" class="form-control" required>
+                                                <input type="text"    name="description" value="<?php if(isset($_POST['description'])) echo $_POST['description']; ?>"   placeholder="Enter Description" class="form-control" required>
                                                
                                             </div>
                                             
                                             
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Days</label>
-                                                 <input type="number"    name="days" value="<?php echo $_POST['days']; ?>"  placeholder="Enter Days" class="form-control" required>
+                                                 <input type="number"  min="1"  name="days" value="<?php if(isset($_POST['days'])) echo $_POST['days']; ?>"  placeholder="Enter Days" class="form-control" required>
                                             </div>
                                               
                                             <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>

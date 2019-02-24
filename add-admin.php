@@ -36,7 +36,7 @@ else{
 			// die($query);
 			$sql=mysqli_query($con,$query);
 			$_SESSION['msg']="Admin Inserted Successfully !!";
-			//header("Location:manage-admin.php");
+			header("Location:manage-admin.php?insert=y");
 		}
 	}
 ?>
@@ -109,7 +109,7 @@ else{
                                         <?php } ?>
                                         <form class="needs-validation" novalidate="" autocomplete="off" name="insertAdmin" onSubmit="return valid();" method="post" enctype="multipart/form-data">
 											<div class="form-group">
-                                                <label for="fname">Admin User Name</label>
+                                                <label for="fname">User Name</label>
                                                 <input type="text" name="admin_user" value="<?php if(isset($_POST['admin_user'])) echo $_POST['admin_user']; ?>" id="admin_user" placeholder="Enter User Name" class="form-control" required>
                                                 
                                             </div>
@@ -124,19 +124,19 @@ else{
                                                
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="basicinput">admin_email</label> 
-                                                <input type="admin_email"    name="admin_email" value="<?php if(isset($_POST['admin_email']))echo $_POST['admin_email']; ?>"   placeholder="Enter admin_email" class="form-control" required>	
+                                                <label class="control-label" for="basicinput">Email</label> 
+                                                <input type="email"    name="admin_email" value="<?php if(isset($_POST['admin_email']))echo $_POST['admin_email']; ?>"   placeholder="Enter Email" class="form-control" required>	
                                             </div>
                                              <div class="form-group">
-                                                <label class="control-label" for="basicinput">admin_pass</label>
+                                                <label class="control-label" for="basicinput">Password</label>
                                                  <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
-							<input type="admin_pass" name="admin_pass_fake" id="admin_pass_fake" value="" style="display:none;" />
-                                                <input type="admin_pass"    name="admin_pass"  placeholder="Enter admin_pass" class="form-control" required>	
+							<input type="password" name="admin_pass_fake" id="admin_pass_fake" value="" style="display:none;" />
+                                                <input type="password"    name="admin_pass"  placeholder="Enter Password" class="form-control" required>	
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="basicinput">Confirm admin_pass</label>
-                                                <input type="admin_pass"    name="cadmin_pass"  placeholder="Enter admin_pass Again" onBlur="javascript:valid();" class="form-control" required>
-                                                <div class="invalid-feedback" id="invalid_feedback" style="display:none;">admin_pass and Confirm admin_pass Field do not match  !!	</div>	
+                                                <label class="control-label" for="basicinput">Confirm password</label>
+                                                <input type="password"    name="cadmin_pass"  placeholder="Enter password Again" onBlur="javascript:valid();" class="form-control" required>
+                                                <div class="invalid-feedback" id="invalid_feedback" style="display:none;">Password and Confirm password Field do not match  !!	</div>	
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Status</label>

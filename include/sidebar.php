@@ -46,6 +46,15 @@
                                     <li><a href="manage_product_types.php">Manage Product Types</a></li>
                                 </ul>
                             </li>
+							<li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Product
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add-product.php">Add Product</a></li>
+                                    <li><a href="manage-product.php">Manage Product</a></li>
+                                </ul>
+                            </li>
                                <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Countries
                                         

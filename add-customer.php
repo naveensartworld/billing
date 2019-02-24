@@ -97,17 +97,17 @@ else{
 										
                                             <div class="form-group">
                                                 <label for="fname">First Name</label>
-                                                <input type="text" name="first_name" value="<?php echo $_POST['first_name']; ?>" id="fname" placeholder="Enter First Name" class="form-control" required>
+                                                <input type="text" name="first_name" value="<?php if(isset($_POST['first_name'])) echo $_POST['first_name']; ?>" id="fname" placeholder="Enter First Name" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Last Name</label>
-                                                <input type="text"    name="last_name" value="<?php echo $_POST['last_name']; ?>"   placeholder="Enter Last Name" class="form-control" required>
+                                                <input type="text"    name="last_name" value="<?php if(isset($_POST['last_name']))  echo $_POST['last_name']; ?>"   placeholder="Enter Last Name" class="form-control" required>
                                                
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Email</label> 
-                                                <input type="email"    name="email" value="<?php echo $_POST['email']; ?>"   placeholder="Enter Email" class="form-control" required>	
+                                                <input type="email"    name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"   placeholder="Enter Email" class="form-control" required>	
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Password</label>
@@ -122,11 +122,11 @@ else{
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Phone</label>
-                                                 <input type="text"    name="phone" value="<?php echo $_POST['phone']; ?>"  placeholder="Enter Phone" class="form-control" required>
+                                                 <input type="text"    name="phone" value="<?php if(isset($_POST['phone'])) echo $_POST['phone']; ?>"  placeholder="Enter Phone" class="form-control" required>
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">City</label>
-                                                 <input type="text"    name="city" value="<?php echo $_POST['city']; ?>"  placeholder="Enter City" class="form-control" required>
+                                                 <input type="text"    name="city" value="<?php if(isset($_POST['city'])) echo $_POST['city']; ?>"  placeholder="Enter City" class="form-control" required>
                                             </div>
                                               <div class="form-group">
                                                 <label class="control-label" for="basicinput">Country</label>
@@ -139,9 +139,12 @@ else{
 													{ ?>
                                                     	<option value="<?php echo $data['row_id']; ?>" 
                                                         	<?php 
+															if(isset($_POST['country']))
+															{
 																if($data['row_id']==$_POST['country']){
 																	echo 'selected="selected"';	
 																}
+															}
 															?>
                                                        	 ><?php echo $data['country_name']; ?></option>
                                                     <?php } ?>
