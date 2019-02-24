@@ -2,16 +2,16 @@
                         <ul class="metismenu" id="menu">
                             
 							 <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Admin
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Admins
                                         
                                     </span></a>
                                 <ul class="collapse">
                                     <li><a href="add-admin.php">Add Admin</a></li>
-                                    <li><a href="manage-admin.php">Manage Admin</a></li>
+                                    <li><a href="manage-admin.php">Manage Admins</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Customer
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Customers
                                         
                                     </span></a>
                                 <ul class="collapse">
@@ -35,6 +35,24 @@
                                 <ul class="collapse">
                                     <li><a href="add_paymodes.php">Add Paymodes</a></li>
                                     <li><a href="manage_paymodes.php">Manage Paymodes</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Product Types
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add_product_types.php">Add Product Type</a></li>
+                                    <li><a href="manage_product_types.php">Manage Product Types</a></li>
+                                </ul>
+                            </li>
+                               <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Countries
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="add_country.php">Add Country</a></li>
+                                    <li><a href="manage_countries.php">Manage Countries</a></li>
                                 </ul>
                             </li>
                             <li>
