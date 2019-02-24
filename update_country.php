@@ -10,12 +10,17 @@ else{
 	
 	if(isset($_POST['submit']))
 	{
-		$ccode = !empty($_POST['ccode'])?$_POST['ccode']:NULL; 
-		$cname = !empty($_POST['cname'])?$_POST['cname']:NULL;
+		$country_name = !empty($_POST['country_name'])?$_POST['country_name']:NULL; 
+		$country_code = !empty($_POST['country_code'])?$_POST['country_code']:NULL;
+		$astatus = $_POST['astatus'];
+
+			
+			$sql=mysqli_query($con,"update countries set country_code = '$country_code',country_name='$country_name',active = '$astatus' where row_id='".decrypt($_GET['id'])."'");
+			
+			
+			$_SESSION['msg']="Countries Updated Successfully !!";
+			header("Location:manage_countries.php?update=y");
 		
-			$sql=mysqli_query($con,"insert into countries (country_code,country_name,active) values('$ccode','$cname','1')");
-			$_SESSION['msg']="Country Inserted Successfully !!";
-			header("Location:manage_countries.php?insert=y");
 		
 	}
 ?>
@@ -24,7 +29,7 @@ else{
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add Country</title>
+    <title>Update Country</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include_once("include/header.php"); ?>
   
@@ -58,13 +63,13 @@ else{
         <div class="main-content">
             <!-- header area start -->
             
-        
+    	
             <!-- page title area end -->
             <div class="main-content-inner">
             	<div class="col-12 mt-5">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="header-title">Add Country</h4>
+                                        <h4 class="header-title">Update Country</h4>
                                         <?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
                                         <div class="alert alert-danger" role="alert" style="margin::0 0 10px 0;">
                                                <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
@@ -75,22 +80,29 @@ else{
                                                <?php echo htmlentities($_SESSION['smsg']); ?><?php echo htmlentities($_SESSION['smsg']="");?>
                                          </div>
                                         <?php } ?>
-                                        <form class="needs-validation" novalidate="" autocomplete="off" name="insertCustomer" method="post" enctype="multipart/form-data">
+                                        <form class="needs-validation" novalidate="" autocomplete="off" name="insertCustomer" onSubmit="return valid();" method="post" enctype="multipart/form-data">
+                                        <?php
+$query=mysqli_query($con,"select * from countries WHERE  row_id='".decrypt($_GET['id'])."'");
+$row = mysqli_fetch_assoc($query)
+?>
 										
                                             <div class="form-group">
-                                                <label for="fname">Country Name</label>
-                                                <input type="text" name="cname" value="<?php echo $_POST['cname']; ?>" id="fname" placeholder="Enter Country Name" class="form-control" required>
+                                                <label for="fname">Country Code</label>
+                                                <input type="text" name="country_code" value="<?php echo $row['country_code']; ?>" id="fname"  class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="basicinput">Country Code</label>
-                                                <input type="text"    name="ccode" value="<?php echo $_POST['ccode']; ?>"   placeholder="Enter Country Code" class="form-control" required>
+                                                <label class="control-label" for="basicinput">Country Name</label>
+                                                <input type="text"    name="country_name" value="<?php echo $row['country_name']; ?>"   class="form-control" required>
                                                
                                             </div>
-                                            
-                                            
-                                            
-                                              
+                                           
+                                              <div class="form-group">
+                                                <label class="control-label" for="basicinput">Status</label>
+                                                
+                                                 <input type="radio"  name="astatus" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>> Active
+                                                  <input type="radio"  name="astatus" value="0" <?php if($row['active']=='0') { ?>  checked <?php } ?> > Inactive
+                                            </div>
                                             <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                            
                                         </form>
