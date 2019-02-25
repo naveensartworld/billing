@@ -78,7 +78,7 @@ else{
 										
                                             <div class="form-group">
                                                 <label for="fname">Paymode</label>
-                                                <input type="text" name="Paymode" value="<?php echo $_POST['Paymode']; ?>" id="fname" placeholder="Enter Pay Mode" class="form-control" required>
+                                                <input type="text" name="Paymode" value="<?php if(isset($_POST['Paymode'])) echo $_POST['Paymode']; ?>" id="fname" placeholder="Enter Pay Mode" class="form-control" required>
                                                 
                                             </div>
                                             
