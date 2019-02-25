@@ -9,26 +9,29 @@ if(strlen($_SESSION['alogin'])==0)
 else{
 	
 	if(isset($_POST['submit']))
-	{ 
+	{
 		$prd_name = !empty($_POST['prd_name'])?$_POST['prd_name']:NULL; 
 		$start_date  = !empty($_POST['start_date'])?$_POST['start_date']:NULL;
 		$end_date = !empty($_POST['end_date'])?$_POST['end_date']:NULL;
 		$description = !empty($_POST['description'])?$_POST['description']:NULL;
 		$prd_type  = !empty($_POST['Prd_type'])?$_POST['Prd_type']:NULL;
-		$subscription = !empty($_POST['subscription'])?$_POST['subscription']:1;
+		$subscription = $_POST['subscription'];
 		$deleted=0;
-		$active=!empty($_POST['active'])?$_POST['active']:1;
+		$active=$_POST['active'];
 		$default_price  = !empty($_POST['default_price'])?$_POST['default_price']:NULL;
 		$default_period  = !empty($_POST['default_period'])?$_POST['default_period']:NULL;
 		$date = date("Y-m-d H:i:s");
 		$updated_by = $_SESSION['id'];
-		$doc_type = 'prod_code';
-		$sequence = getHighKey($doc_type,$con);
-		$query = "insert into products(prd_name,start_date,prd_code,end_date,description,prd_type,subscription,default_price,active,default_period,create_date,create_by,last_modify_date,last_modify_by,deleted) values('$prd_name','$start_date','$sequence','$end_date','$description','$prd_type','$subscription','$default_price','$active','$default_period', '$date','$updated_by','$date','$updated_by','$deleted')";
 		
-		$sql=mysqli_query($con,$query);
-		$_SESSION['msg']="Product Inserted Successfully !!";
-		header("Location:manage-product.php?insert=y");
+		
+		
+		$query = "update  products set prd_name = '$prd_name',start_date='$start_date',end_date='$end_date',description = '$description',prd_type = '$prd_type',subscription ='$subscription',default_price = '$default_price',active = '$active',default_period='$default_period',last_modify_date = '$date',last_modify_by = '$updated_by' where row_id='".decrypt($_GET['id'])."'";	
+		
+		$sql = mysqli_query($con,$query);
+		$_SESSION['msg']="Customer Updated Successfully !!";
+		header("Location:manage-product.php?update=y");
+		
+		
 	
 	}
 ?>
@@ -37,7 +40,7 @@ else{
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Product || Add Product</title>
+    <title>Update Product Types</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include_once("include/header.php"); ?>
   
@@ -71,13 +74,13 @@ else{
         <div class="main-content">
             <!-- header area start -->
             
-        
+    	
             <!-- page title area end -->
             <div class="main-content-inner">
             	<div class="col-12 mt-5">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="header-title">Add Product</h4>
+                                        <h4 class="header-title">Update Product</h4>
                                         <?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
                                         <div class="alert alert-danger" role="alert" style="margin::0 0 10px 0;">
                                                <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
@@ -88,27 +91,31 @@ else{
                                                <?php echo htmlentities($_SESSION['smsg']); ?><?php echo htmlentities($_SESSION['smsg']="");?>
                                          </div>
                                         <?php } ?>
-                                        <form class="needs-validation" novalidate="" autocomplete="off" name="insertProduct" onSubmit="return valid();" method="post" enctype="multipart/form-data">
+                                        <form class="needs-validation" novalidate="" autocomplete="off" name="insertCustomer" onSubmit="return valid();" method="post" enctype="multipart/form-data">
+                                        <?php
+$query=mysqli_query($con,"select * from products WHERE  row_id='".decrypt($_GET['id'])."'");
+$row = mysqli_fetch_assoc($query)
+?>
 										
                                             <div class="form-group">
                                                 <label for="pname">Product Name</label>
-                                                <input type="text" name="prd_name" value="<?php if(isset($_POST['prd_name'])) echo $_POST['prd_name']; ?>" id="pname" placeholder="Enter Product Name" class="form-control" required>
+                                                <input type="text" name="prd_name" value="<?php if(isset($row['prd_name'])) echo $row['prd_name']; ?>" id="pname" placeholder="Enter Product Name" class="form-control" required>
                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">Start Date</label>
-                                                <input type="date"    name="start_date" value="<?php if(isset($_POST['start_date']))  echo $_POST['start_date']; ?>"   placeholder="Enter Start Date" class="form-control" required>
+                                                <input type="date"    name="start_date" value="<?php if(isset($row['start_date']))  echo dateFormat($row['start_date'],1); ?>"   class="form-control" required>
                                                
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="basicinput">End Date</label>
-                                                <input type="date"    name="end_date" value="<?php if(isset($_POST['end_date']))  echo $_POST['end_date']; ?>"   placeholder="Enter End Date" class="form-control" required>
+                                                <input type="date"    name="end_date" value="<?php if(isset($row['end_date']))  echo dateFormat($row['end_date'],1); ?>"  class="form-control" required>
                                                
                                             </div>
                                             
                                              <div class="form-group">
                                                 <label class="control-label" for="basicinput">Description</label>
-                                                 <textarea name="description" placeholder="Enter Description" class="form-control" required ><?php if(isset($_POST['description'])) echo $_POST['description']; ?></textarea>
+                                                 <textarea name="description" placeholder="Enter Description" class="form-control" required ><?php if(isset($row['description'])) echo $row['description']; ?></textarea>
 												 
                                             </div>
                                              
@@ -123,9 +130,10 @@ else{
 													{ ?>
                                                     	<option value="<?php echo $data['row_id']; ?>" 
                                                         	<?php 
-															if(isset($_POST['Prd_type']))
+															
+															if(isset($row['prd_type']))
 															{
-																if($data['row_id']==$_POST['Prd_type']){
+																if($data['row_id']==$row['prd_type']){
 																	echo 'selected="selected"';	
 																}
 															}
@@ -138,14 +146,14 @@ else{
 											
 											 <div class="form-group">
                                                 <label class="control-label" for="basicinput">Subscription</label>
-													<input type="radio" id="active" name="active" value="1">
+													<input type="radio" id="active" name="active" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>>
 													<label for="active">Yes</label>
-													<input type="radio" id="inactive" name="active" value="0">
+													<input type="radio" id="inactive" name="active" value="0" <?php  if($row['active']=='0') { ?> checked <?php } ?>>
 													<label for="inactive">No</label>
                                             </div>
 											<div class="form-group">
                                                 <label class="control-label" for="basicinput">Default Price</label>
-                                                 <input type="text"    name="default_price" value="<?php if(isset($_POST['default_price'])) echo $_POST['default_price']; ?>"  placeholder="Enter Default Price" class="form-control" required>
+                                                 <input type="text"    name="default_price" value="<?php if(isset($row['default_price'])) echo $row['default_price']; ?>"  placeholder="Enter Default Price" class="form-control" required>
                                             </div>
 											<div class="form-group">
                                                 <label class="control-label" for="basicinput">Periods</label>
@@ -155,12 +163,14 @@ else{
 													 $sqlQuery = 'select row_id,period_name from periods where active ="1"';
 													 $result = mysqli_query($con,$sqlQuery);
 													 while($data = mysqli_fetch_array($result))
-													{ ?>
+													{ 
+														
+														?>
                                                     	<option value="<?php echo $data['row_id']; ?>" 
                                                         	<?php 
-															if(isset($_POST['period_name']))
+															if(isset($row['default_period']))
 															{
-																if($data['row_id']==$_POST['period_name']){
+																if($data['row_id']==$row['default_period']){
 																	echo 'selected="selected"';	
 																}
 															}
@@ -169,6 +179,13 @@ else{
                                                     <?php } ?>
                                                 </select>
                                                 
+                                            </div>
+                                             
+                                              <div class="form-group">
+                                                <label class="control-label" for="basicinput">Status</label>
+                                                
+                                                 <input type="radio"  name="astatus" value="1" <?php  if($row['active']=='1') { ?> checked <?php } ?>> Active
+                                                  <input type="radio"  name="astatus" value="0" <?php if($row['active']=='0') { ?>  checked <?php } ?> > Inactive
                                             </div>
                                             <button type="submit" name="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                            
@@ -189,6 +206,6 @@ else{
     </div>
 </body>
 <?php include_once("include/footer.php"); ?>
-  
+
 </html>
 <?php } ?>

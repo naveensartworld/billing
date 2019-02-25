@@ -23,9 +23,13 @@ function getHighKey($doc_type,$con){
 	return $sequence;
 }
 
-function dateFormat($date_format){
-	return date('d-M-Y H:i A',strtotime($date_format));
+function dateFormat($date_format,$dateFlag=0){
+	if($dateFlag==1)
+		return date('Y-m-d',strtotime($date_format));
+	else
+		return date('d-M-Y H:i A',strtotime($date_format));
 }
+
 
 
 function encrypt($sData){
