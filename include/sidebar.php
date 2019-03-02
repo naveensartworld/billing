@@ -73,6 +73,15 @@
                                     <li><a href="manage_currency.php">Manage Currencies</a></li>
                                 </ul>
                             </li>
+							<li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Invoice
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <!--<li><a href="add-invoice.php">Add Invoice</a></li>-->
+                                    <li><a href="manage-invoices.php">Manage Invoices</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="change-password.php" ><span>Change Password</span></a>
                               
