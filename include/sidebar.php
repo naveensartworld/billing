@@ -82,6 +82,24 @@
                                     <li><a href="manage-invoices.php">Manage Invoices</a></li>
                                 </ul>
                             </li>
+							<li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Inventory
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <!--<li><a href="add-inventory.php">Add Inventory</a></li>-->
+                                    <li><a href="manage-inventory.php">Manage Inventory</a></li>
+                                </ul>
+                            </li>
+							<li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Manage Hosting
+                                        
+                                    </span></a>
+                                <ul class="collapse">
+                                    <!--<li><a href="add-hosting.php">Add Hosting</a></li>-->
+                                    <li><a href="manage-hosting.php">Manage Hosting</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="change-password.php" ><span>Change Password</span></a>
                               

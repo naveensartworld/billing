@@ -10,8 +10,8 @@ else
 {
 	if(isset($_GET['del']))
 	{
-		mysqli_query($con,"update invoices set deleted = 1 where row_id = '".decrypt($_GET['id'])."'");
-		$_SESSION['msg']="Invoice deleted successfully!!";
+		mysqli_query($con,"update inventory set deleted = 1 where row_id = '".decrypt($_GET['id'])."'");
+		$_SESSION['msg']="Inventory deleted successfully!!";
 	}
 ?>
 <!doctype html>
@@ -64,7 +64,7 @@ else
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h2 class="header-title">Manage Invoices</h2>
+                                <h2 class="header-title">Manage Inventory</h2>
                                 	<?php if(isset($_SESSION['msg']) and $_SESSION['msg']!='') { ?>
                                     <div class="alert alert-success" role="success" style="margin::0 0 10px 0;">
                                            <?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']="");?>
@@ -85,34 +85,33 @@ else
                                         <thead class="text-capitalize">
                                             <tr>
                                             	<th>#</th>
-                                                <th>Inv No</th>
-                                                <th>Inv Date</th>
+                                                <th>Host Code</th>
+												<th>Prd Type</th>
+                                                <th>Sub Type</th>
+												<th>DB Name</th>
+												<th>Dbo</th>
+                                                <th>DB Host</th>
 												<th>Cus Code</th>
-												<th>Amount</th>
-                                                <th>Discount</th>
-												<th>Net Amount</th>
-												<th>Amount Paid</th>
 												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         
-                                        <?php $query=mysqli_query($con,"select * from invoices order by row_id desc");
+                                        <?php $query=mysqli_query($con,"select * from inventory order by row_id desc");
 $cnt=1;
 while($row = mysqli_fetch_array($query))
 {
 ?>	
                                             <tr>
                                                 <td><?php echo htmlentities($row['row_id']);?></td>
-                                                <td><?php echo htmlentities($row['inv_no ']);?></td>
-                                                <td><?php echo htmlentities(dateFormat($row['inv_date']));?></td>
+                                                <td><?php echo htmlentities($row['host_code ']);?></td>
+                                                <td><?php echo htmlentities(($row['prd_type']));?></td>
+												<td><?php echo htmlentities($row['sub_type']);?></td>
+												<td><?php echo htmlentities($row['database_name']);?></td>
+												<td><?php echo htmlentities($row['dbo']);?></td>
+												<td><?php echo htmlentities($row['db_host']);?></td>
 												<td><?php echo htmlentities($row['cus_code']);?></td>
-												<td><?php echo htmlentities($row['amount']);?></td>
-												<td><?php echo htmlentities($row['discount']);?></td>
-												<td><?php echo htmlentities($row['tax']);?></td>
-												<td><?php echo htmlentities($row['net_amount']);?></td>
-												<td><?php echo htmlentities($row['amount_paid']);?></td>
 												<td><?php  if($row['status']=='1') { echo 'Active'; }  else { echo 'Inactive'; } ?></td>
                                                 <td><a href="update-invoices.php?id=<?php echo encrypt($row['row_id']); ?>">Edit</a></td>
                                             </tr>
